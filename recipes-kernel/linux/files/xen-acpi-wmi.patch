@@ -2115,3 +2115,32 @@ index 0000000..070edae
 +} xen_wmi_obj_invocation_data_t;
 +
 +#endif /* _XEN_WMI_ACPI */
+
+
+diff --git a/drivers/platform/x86/wmi.c b/drivers/platform/x86/wmi.c
+index b13344c..6f72968 100644
+--- a/drivers/platform/x86/wmi.c
++++ b/drivers/platform/x86/wmi.c
+@@ -50,19 +50,6 @@ MODULE_LICENSE("GPL");
+ static DEFINE_MUTEX(wmi_data_lock);
+ static LIST_HEAD(wmi_block_list);
+ 
+-struct guid_block {
+-	char guid[16];
+-	union {
+-		char object_id[2];
+-		struct {
+-			unsigned char notify_id;
+-			unsigned char reserved;
+-		};
+-	};
+-	u8 instance_count;
+-	u8 flags;
+-};
+-
+ struct wmi_block {
+ 	struct list_head list;
+ 	struct guid_block gblock;
+-- 
+2.1.3
+
