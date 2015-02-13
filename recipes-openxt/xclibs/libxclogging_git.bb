@@ -13,6 +13,4 @@ S = "${WORKDIR}/git/xclogging"
 
 PARALLEL_MAKE = "-j 1"
 
-inherit autotools
-inherit pkgconfig
-inherit xenclient
+inherit autotools-brokensep pkgconfig xenclient
