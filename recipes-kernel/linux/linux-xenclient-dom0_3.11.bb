@@ -5,7 +5,10 @@ require linux-xenclient-${PV}.inc
 
 SRC_URI += " \
             file://pciback-restrictive-attr.patch;striplevel=1 \
+            file://pciback-allow-bus-reset.patch;striplevel=1 \
             "
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-3.11"
+
+PR = "5"
 
