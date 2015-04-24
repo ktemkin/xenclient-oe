@@ -22,9 +22,8 @@ ASNEEDED = ""
 
 LDFLAGS += "-lm -lcrypto"
 
-inherit autotools
-inherit xenclient
-inherit update-rc.d
+inherit autotools xenclient update-rc.d pkgconfig
+
 
 INITSCRIPT_NAME = "xenclient-input"
 INITSCRIPT_PARAMS = "defaults 75"
