@@ -1,6 +1,14 @@
 #!/bin/sh
-# hwclock.sh Set system clock to hardware clock, according to the UTC
-#               setting in /etc/default/rcS (see also rcS(5)).
+### BEGIN INIT INFO
+# Provides:          hwclock
+# Required-Start:    
+# Required-Stop:     $local_fs
+# Default-Start:     S
+# Default-Stop:      0 6
+# Short-Description: Set system clock
+# Description:       Set system clock to hardware clock, according to the UTC
+#                    setting in /etc/default/rcS (see also rcS(5)).
+### END INIT INFO
 #
 # WARNING:      If your hardware clock is not in UTC/GMT, this script
 #               must know the local time zone. This information is
@@ -12,10 +20,9 @@
 
 [ ! -x /sbin/hwclock ] && exit 0
 
-. /etc/default/rcS
+[ -f /etc/default/rcS ] && . /etc/default/rcS
 
-[ "$UTC" = yes ] && UTC=--utc || UTC=--localtime
-
+[ "$UTC" = "yes" ] && tz="--utc" || tz="--localtime"
 case "$1" in
         start)
                 if [ "$VERBOSE" != no ]
@@ -28,9 +35,9 @@ case "$1" in
 		then
 			if [ -z "$TZ" ]
 			then
-	                   hwclock -s $UTC;# --hctosys
+	                   hwclock $tz --hctosys
 			else
-			   TZ="$TZ" hwclock -s $UTC;# --hctosys
+			   TZ="$TZ" hwclock $tz --hctosys
 			fi
 		fi
 
@@ -53,7 +60,7 @@ case "$1" in
 		fi
 		if [ "$HWCLOCKACCESS" != no ]
 		then
-			hwclock -w $UTC;# --systohc
+			hwclock $tz --systohc
 		fi
 		if [ "$VERBOSE" != no ]
 		then
@@ -64,7 +71,7 @@ case "$1" in
 	show)
 		if [ "$HWCLOCKACCESS" != no ]
 		then
-			hwclock -r $UTC;# --show
+			hwclock $tz --show
 		fi
 		;;
         *)
