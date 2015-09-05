@@ -1,5 +1,5 @@
 diff --git a/include/drm/i915_drm.h b/include/drm/i915_drm.h
-index 515fb28..94476e6 100644
+index 15dd01d..30042f3 100644
 --- a/include/drm/i915_drm.h
 +++ b/include/drm/i915_drm.h
 @@ -224,6 +224,7 @@ typedef struct _drm_i915_sarea {
@@ -13,12 +13,12 @@ index 515fb28..94476e6 100644
 @@ -275,6 +276,7 @@ typedef struct _drm_i915_sarea {
  #define DRM_IOCTL_I915_REG_READ			DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_REG_READ, struct drm_i915_reg_read)
  #define DRM_IOCTL_I915_GET_RESET_STATS		DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_GET_RESET_STATS, struct drm_i915_reset_stats)
- #define DRM_IOCTL_I915_GEM_USERPTR			DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_GEM_USERPTR, struct drm_i915_gem_userptr)
+ #define DRM_IOCTL_I915_GEM_USERPTR		DRM_IOWR(DRM_COMMAND_BASE + DRM_I915_GEM_USERPTR,  struct drm_i915_gem_userptr)
 +#define DRM_IOCTL_I915_GEM_FOREIGN              DRM_IOWR (DRM_COMMAND_BASE + DRM_I915_GEM_FOREIGN, struct drm_i915_gem_foreign)
  
  /* Allow drivers to submit batchbuffers directly to hardware, relying
   * on the security mechanisms provided by hardware.
-@@ -1065,4 +1067,13 @@ struct drm_i915_gem_userptr {
+@@ -1066,4 +1068,13 @@ struct drm_i915_gem_userptr {
  	__u32 handle;
  };
  
