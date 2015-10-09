@@ -103,6 +103,7 @@ SRC_URI = "${XEN_SRC_URI};name=source \
     file://blktap-timeout.patch;patch=1 \
     file://stubdomain-msi-irq-access.patch;striplevel=1 \
     file://workaround-nehalem-igd-vtd.patch;patch=1 \
+    file://xen-x86-Fix-up-rules-when-forcing-mno-sse.patch;patch=1 \
 "
 
 SRC_URI[source.md5sum] := "${XEN_SRC_MD5SUM}"
@@ -113,4 +114,13 @@ S = "${WORKDIR}/xen-${XEN_VERSION}"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=e0f0f3ac55608719a82394cc353928df"
 
-INC_PR = "r3"
+INC_PR = "r4"
+
+do_configure_prepend() {
+    # fixup AS/CC/CCP/etc variable within StdGNU.mk
+    for i in AS LD CC CPP AR RANLIB NM STRIP OBJCOPY OBJDUMP; do
+        sed -i "s/^\($i\s\s*\).*=/\1?=/" ${S}/config/StdGNU.mk
+    done
+    # fixup environment passing in some makefiles
+    sed -i 's#\(\w*\)=\(\$.\w*.\)#\1="\2"#' ${S}/tools/firmware/Makefile
+}

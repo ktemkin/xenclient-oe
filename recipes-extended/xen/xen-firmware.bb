@@ -46,4 +46,3 @@ do_install() {
 	# Remove files already provided by xen-tools
 	rm -rf ${D}/usr/include
 }
-
