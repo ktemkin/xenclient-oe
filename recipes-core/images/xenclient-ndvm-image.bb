@@ -84,11 +84,6 @@ remove_initscripts() {
     fi
 }
 
-support_vmlinuz() {
-	# Make a vmlinuz link for items that explicitly reference it
-	ln -sf bzImage ${IMAGE_ROOTFS}/boot/vmlinuz
-}
-
 # Symlink /root to /home/root until nothing references /root anymore, e.g. SELinux file_contexts
 # Will be needed when we follow upstream base-files
 link_root_dir() {
@@ -99,7 +94,7 @@ force_iproute2_bin() {
     ln -sf /sbin/ip.iproute2 ${IMAGE_ROOTFS}/bin/ip
 }
 
-ROOTFS_POSTPROCESS_COMMAND += " post_rootfs_shell_commands; remove_initscripts; support_vmlinuz; force_iproute2_bin; "
+ROOTFS_POSTPROCESS_COMMAND += " post_rootfs_shell_commands; remove_initscripts; force_iproute2_bin; "
 
 inherit selinux-image
 #inherit validate-package-versions

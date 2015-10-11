@@ -9,6 +9,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/linux-xenclient-${PV_MAJOR}.${PV_MINOR}:"
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV_MAJOR}.${PV_MINOR}:"
 
 require linux-xenclient-${PV_MAJOR}.${PV_MINOR}.inc
+require linux-openxt-service-vm.inc
 
 PR = "r1"
 

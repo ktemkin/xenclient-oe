@@ -53,17 +53,12 @@ remove_initscripts() {
     fi
 }
 
-support_vmlinuz() {
-	# Make a vmlinuz link for items that explicitly reference it
-	ln -sf bzImage ${IMAGE_ROOTFS}/boot/vmlinuz
-}
-
 # Symlink /root to /home/root until nothing references /root anymore, e.g. SELinux file_contexts
 link_root_dir() {
     ln -sf /home/root ${IMAGE_ROOTFS}/root
 }
 
-ROOTFS_POSTPROCESS_COMMAND += " post_rootfs_shell_commands; remove_initscripts; support_vmlinuz; link_root_dir; "
+ROOTFS_POSTPROCESS_COMMAND += " post_rootfs_shell_commands; remove_initscripts; link_root_dir; "
 
 inherit image
 #inherit validate-package-versions
