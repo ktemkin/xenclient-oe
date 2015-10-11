@@ -1,8 +1,8 @@
 diff --git a/src/dnsmasq.h b/src/dnsmasq.h
-index 0b9c7dd..1cd3fda 100644
+index e74b15a..a314632 100644
 --- a/src/dnsmasq.h
 +++ b/src/dnsmasq.h
-@@ -461,6 +461,7 @@ struct irec {
+@@ -518,6 +518,7 @@ struct irec {
    struct in_addr netmask; /* only valid for IPv4 */
    int tftp_ok, dhcp_ok, mtu, done, warned, dad, dns_auth, index, multicast_done, found;
    char *name; 
@@ -10,7 +10,7 @@ index 0b9c7dd..1cd3fda 100644
    struct irec *next;
  };
  
-@@ -832,7 +833,7 @@ extern struct daemon {
+@@ -924,7 +925,7 @@ extern struct daemon {
    struct cond_domain *cond_domain, *synth_domains;
    char *runfile; 
    char *lease_change_command;
@@ -20,10 +20,10 @@ index 0b9c7dd..1cd3fda 100644
    struct server *servers;
    struct ipsets *ipsets;
 diff --git a/src/network.c b/src/network.c
-index 3a6cad2..6768a6e 100644
+index 5067007..8c32b25 100644
 --- a/src/network.c
 +++ b/src/network.c
-@@ -456,6 +456,7 @@ static int iface_allowed(struct iface_param *param, int if_index, char *label,
+@@ -489,6 +489,7 @@ static int iface_allowed(struct iface_param *param, int if_index, char *label,
  	  daemon->interfaces = iface;
  	  return 1;
  	}
@@ -31,7 +31,7 @@ index 3a6cad2..6768a6e 100644
        free(iface);
  
      }
-@@ -1071,6 +1072,12 @@ void join_multicast(int dienow)
+@@ -1108,6 +1109,12 @@ void join_multicast(int dienow)
  int random_sock(int family)
  {
    int fd;
@@ -44,7 +44,7 @@ index 3a6cad2..6768a6e 100644
  
    if ((fd = socket(family, SOCK_DGRAM, 0)) != -1)
      {
-@@ -1109,6 +1116,13 @@ int random_sock(int family)
+@@ -1146,6 +1153,13 @@ int random_sock(int family)
  #endif
  	      }
  #endif
@@ -59,26 +59,26 @@ index 3a6cad2..6768a6e 100644
  	    if (bind(fd, (struct sockaddr *)&addr, sa_len(&addr)) == 0)
  	      return fd;
 diff --git a/src/option.c b/src/option.c
-index 06031d8..593e1bd 100644
+index 45d8875..42718ba 100644
 --- a/src/option.c
 +++ b/src/option.c
-@@ -138,6 +138,7 @@ struct myoption {
- #define LOPT_DNSSEC_CHECK  334
+@@ -147,6 +147,7 @@ struct myoption {
  #define LOPT_LOCAL_SERVICE 335
  #define LOPT_DNSSEC_TIME   336
-+#define LOPT_DNSOUT_IF    337
- 
+ #define LOPT_LOOP_DETECT   337
++#define LOPT_DNSOUT_IF     338
  
  #ifdef HAVE_GETOPT_LONG
-@@ -168,6 +169,7 @@ static const struct myoption opts[] =
+ static const struct option opts[] =  
+@@ -177,6 +178,7 @@ static const struct myoption opts[] =
      { "domain", 1, 0, 's' },
      { "domain-suffix", 1, 0, 's' },
      { "interface", 1, 0, 'i' },
 +    { "dnsout-interface", 1, 0, LOPT_DNSOUT_IF },
      { "listen-address", 1, 0, 'a' },
+     { "local-service", 0, 0, LOPT_LOCAL_SERVICE },
      { "bogus-priv", 0, 0, 'b' },
-     { "bogus-nxdomain", 1, 0, 'B' },
-@@ -318,6 +320,7 @@ static struct {
+@@ -335,6 +337,7 @@ static struct {
    { 'h', OPT_NO_HOSTS, NULL, gettext_noop("Do NOT load %s file."), HOSTSFILE },
    { 'H', ARG_DUP, "<path>", gettext_noop("Specify a hosts file to be read in addition to %s."), HOSTSFILE },
    { 'i', ARG_DUP, "<interface>", gettext_noop("Specify interface(s) to listen on."), NULL },
@@ -86,11 +86,11 @@ index 06031d8..593e1bd 100644
    { 'I', ARG_DUP, "<interface>", gettext_noop("Specify interface(s) NOT to listen on.") , NULL },
    { 'j', ARG_DUP, "set:<tag>,<class>", gettext_noop("Map DHCP user class to tag."), NULL },
    { LOPT_CIRCUIT, ARG_DUP, "set:<tag>,<circuit>", gettext_noop("Map RFC3046 circuit-id to tag."), NULL },
-@@ -1989,6 +1992,20 @@ static int one_opt(int option, char *arg, char *errstr, char *gen_err, int comma
+@@ -2071,6 +2074,20 @@ static int one_opt(int option, char *arg, char *errstr, char *gen_err, int comma
  	break;
        /* fall through */
  
-+    case LOPT_DNSOUT_IF: /*--dnsout-interface */
++      case LOPT_DNSOUT_IF: /*--dnsout-interface */
 +      do {
 +          struct iname *new = opt_malloc(sizeof (struct iname));
 +          memset(new, 0, sizeof (*new));
