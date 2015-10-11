@@ -1,10 +1,10 @@
-PR = "openxt-01"
+PR .= ".1"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
-SRC_URI += " \
-            file://libgcrypt-md5-checkpoint.patch \
-           "
+#SRC_URI += " \
+#            file://libgcrypt-md5-checkpoint.patch \
+#           "
 
 CFLAGS_append = " -Wno-implicit-function-declaration "
 

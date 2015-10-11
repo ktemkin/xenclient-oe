@@ -1,4 +1,5 @@
-PR = "openxt-01"
+PR .= ".1"
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 # add SE Linux dependency, so selinux is detected and pam selinux module is build

@@ -1,6 +1,6 @@
 # Ported out from the netbase_4.21 recipe.  Still need to check how much of this is not done by upstream.
 
-PR = "openxt-01"
+PR .= ".1"
 
 SRC_URI_OVERRIDES_PACKAGE_ARCH = "1"
 

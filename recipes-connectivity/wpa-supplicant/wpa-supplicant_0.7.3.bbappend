@@ -6,7 +6,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 DEPENDS += "openssl"
  
-PR = "openxt-01"
+PR .= ".1"
 
 SRC_URI += " \
             file://dbus-scan-results.patch;patch=1 \

@@ -1,8 +1,8 @@
-PR = "openxt-01"
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+PR .= ".1"
 
-DEPENDS = "polkit-gnome libnotify networkmanager dbus-glib libglade gconf gnome-keyring libgnome-keyring iso-codes"
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 #RDEPENDS_${PN} = "${@base_conditional('MACHINE', 'xenclient-uivm', '', 'networkmanager', d)} notification-daemon"
 

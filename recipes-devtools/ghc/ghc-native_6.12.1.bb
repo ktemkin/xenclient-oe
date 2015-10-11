@@ -25,7 +25,7 @@ SRC_URI[sha256sum] = "cdf99f9add677a925ee87a5b87e94eb595ed9b72034453c195ef9379bd
 
 #S = "${WORKDIR}/${PN}-${PV}"
 
-PR = "openxt-01"
+PR = "r1"
 
 S = "${WORKDIR}/ghc-${PV}"
 

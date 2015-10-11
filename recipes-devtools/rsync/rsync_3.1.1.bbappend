@@ -1,3 +1,3 @@
-PR = "openxt-01"
+PR .= "r1"
 
 EXTRA_OECONF += "--enable-xattr-support"

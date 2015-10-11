@@ -1,4 +1,4 @@
-PR="openxt-01"
+PR .= ".1"
 
 RDEPENDS_packagegroup-base-keyboard = "\
     kbd \

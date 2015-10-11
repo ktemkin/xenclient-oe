@@ -3,7 +3,6 @@ SRC_URI[sha256sum] = "27bb906cc06d29ead85ca95e7268401b914c2eac81663a7db0e241f117
 DEPENDS = "openssl"
 LICENSE = "CPL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3728dd9198d68b49f7f9ed1f3f50ba14"
-PR = "openxt-01"
 
 #RDEPENDS_${PN} += "tinylogin"
 

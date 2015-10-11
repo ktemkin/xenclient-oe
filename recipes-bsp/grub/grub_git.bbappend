@@ -1,4 +1,4 @@
-PR = "openxt-01"
+PR .= ".1"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-git:"
 

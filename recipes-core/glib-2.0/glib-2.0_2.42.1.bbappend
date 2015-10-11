@@ -1,4 +1,4 @@
-PR = "openxt-01"
+PR .= ".1"
 
 # TODO: Upstream glib disables SELinux for class-native.  Not sure if this affects OpenXT
 # or not so removing it for now.  Needs more investigation.
