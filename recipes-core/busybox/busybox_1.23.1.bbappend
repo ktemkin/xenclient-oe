@@ -39,11 +39,6 @@ do_install_append() {
     grep -v '/usr/bin/lsusb' ${D}${sysconfdir}/busybox.links.nosuid > ${S}/busybox.links.nosuid.tmp
     install -m 0644 ${S}/busybox.links.nosuid.tmp ${D}${sysconfdir}/busybox.links.nosuid
 
-    grep -v '/usr/sbin/udhcpc' ${D}${sysconfdir}/busybox.links.nosuid > ${S}/busybox.links.nosuid.tmp
-    install -m 0644 ${S}/busybox.links.nosuid.tmp ${D}${sysconfdir}/busybox.links.nosuid
-
-    rm -rf ${D}/usr/share/udhcpc
-
     # SELinux doesn't like busybox links
     #install -d ${D}${base_sbindir}
     #cp -a ${D}${base_bindir}/busybox.nosuid ${D}${base_sbindir}/udhcpc
