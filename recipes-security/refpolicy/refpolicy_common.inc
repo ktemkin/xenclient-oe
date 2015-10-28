@@ -59,9 +59,8 @@ do_compile() {
 }
 
 do_install() {
-	oe_runmake install \
-		DESTDIR=${D}
-
+	oe_runmake 'DESTDIR=${D}' 'prefix=${D}${prefix}' install
+	
 	# Prepare to create policy store
 	mkdir -p ${D}${sysconfdir}/selinux/
 	cat <<-EOF > ${D}${sysconfdir}/selinux/semanage.conf
@@ -99,12 +98,14 @@ EOF
 	fi
 
 	# Create policy store and build the policy
-	semodule -p ${D} -s ${POLICY_NAME} -n -B
+	semodule -p ${D} -S "${sysconfdir}/selinux" -s ${POLICY_NAME} -n -B
 	rm -f ${D}${sysconfdir}/selinux/semanage.conf
+	# no need to leave tmp dir created by semanage lanying around
+	rm -rf ${D}${sysconfdir}/selinux/tmp
 
 	cat ${WORKDIR}/customizable_types >> \
 		${D}${sysconfdir}/selinux/${POLICY_NAME}/contexts/customizable_types
 
 	# install policy headers
-	oe_runmake install-headers DESTDIR=${D}
+	oe_runmake 'DESTDIR=${D}' 'prefix=${D}${prefix}' install-headers
 }
