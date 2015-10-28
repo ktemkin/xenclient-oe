@@ -73,12 +73,12 @@ post_rootfs_shell_commands() {
 	mkdir -p ${IMAGE_ROOTFS}/boot/system ;
 
 	# Remove unwanted packages specified above
-	opkg-cl -f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} ${OPKG_ARGS} -force-depends remove ${PACKAGE_REMOVE};
+	opkg -f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} ${OPKG_ARGS} -force-depends remove ${PACKAGE_REMOVE};
 
 	# Remove network modules except netfront
 	for x in `find ${IMAGE_ROOTFS}/lib/modules -name *.ko | grep drivers/net | grep -v xen-netfront`; do
 		pkg="kernel-module-`basename $x .ko | sed s/_/-/g`";
-		opkg-cl ${IPKG_ARGS} -force-depends remove $pkg;
+		opkg ${IPKG_ARGS} -force-depends remove $pkg;
 	done;
 
 	# Write coredumps in /var/cores
