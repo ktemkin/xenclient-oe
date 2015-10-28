@@ -41,7 +41,7 @@ do_configure_prepend_class-target() {
 	cd ${S}
 	cat << EOF > ghc-cc
 #!/bin/sh
-exec ${CC} ${CFLAGS} "\$@"
+exec ${CC} ${CFLAGS} -std=gnu89 "\$@"
 EOF
 	chmod +x ghc-cc
 
@@ -76,7 +76,7 @@ do_configure_prepend_class-native() {
 	cd ${S}
 	cat << EOF > ghc-cc
 #!/bin/sh
-exec ${CC} ${CFLAGS} "\$@"
+exec ${CC} ${CFLAGS} -std=gnu89 "\$@"
 EOF
 	chmod +x ghc-cc
 
@@ -113,7 +113,7 @@ ghc_pkg_prep_devshell() {
 	cd ${S}
 	cat << EOF > ghc-cc
 #!/bin/sh
-exec ${CC} ${CFLAGS} "\$@"
+exec ${CC} ${CFLAGS} -std=gnu89 "\$@"
 EOF
 	chmod +x ghc-cc
 
@@ -131,7 +131,7 @@ EOF
 
 	cat << EOF > runconfigure
 #!/bin/sh
-        CFLAGS="${CFLAGS}" \
+        CFLAGS="${CFLAGS} -std=gnu89" \
         CPP="${CPP}" \
         ${RUNSETUP} configure --package-db=${LOCAL_GHC_PACKAGE_DATABASE} --enable-shared --with-compiler=ghc-${GHC_VERSION} --ghc-options='-pgmc ./ghc-cc -pgml ./ghc-ld' --with-gcc=./ghc-cc --prefix=${prefix} --libsubdir=ghc-local/\$pkgid ${CABAL_CONFIGURE_EXTRA_OPTS}
 EOF
@@ -158,7 +158,7 @@ do_configure() {
         # Below was BUILD_CFLAGS but we should let OE set the proper value by using CFLAGS
         # Also changed CPP from `which cpp` as that can also be decided by OE
         # The previous instance of this in devshell was also changed
-        CFLAGS="${CFLAGS}" \
+        CFLAGS="${CFLAGS} -std=gnu89" \
         CPP="${CPP}" \
         ${RUNSETUP} configure --package-db=${LOCAL_GHC_PACKAGE_DATABASE} --enable-shared --with-compiler=ghc-${GHC_VERSION} --ghc-options='-pgmc ./ghc-cc -pgml ./ghc-ld' --with-gcc=./ghc-cc --prefix=${prefix} --libsubdir=ghc-local/\$pkgid ${CABAL_CONFIGURE_EXTRA_OPTS}
 }

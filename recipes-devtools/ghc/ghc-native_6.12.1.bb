@@ -32,7 +32,7 @@ S = "${WORKDIR}/ghc-${PV}"
 inherit native pythonnative
 
 PARALLEL_MAKE=""
-CFLAGS_append = ' -Wno-unused'
+CFLAGS_append = ' -Wno-unused -std=gnu89'
 
 # huge hack to be able to generate ipks from native package
 #python() {
