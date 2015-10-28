@@ -4,18 +4,19 @@ DEPENDS = "openssl"
 LICENSE = "CPL-1.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3728dd9198d68b49f7f9ed1f3f50ba14"
 
-#RDEPENDS_${PN} += "tinylogin"
+PR = "r1"
 
 SRC_URI = "http://downloads.sourceforge.net/${PN}/${PN}-${PV}.tar.gz \
            file://trousers-no-groups-users.patch;patch=1 \
            file://trousers-tcsd-conf.patch;patch=1 \
            file://trousers-standalone.patch;patch=1 \
            file://trousers_compile_with_newer_gcc.patch;patch=1 \
+           file://gcc5.patch \
            file://trousers.initscript \
            file://45-trousers.rules \
 "
 
-CFLAGS_append = " -Wno-error=unused-parameter -Wno-error=strict-aliasing"
+CFLAGS_append = " -Wno-error=unused-parameter -Wno-error=strict-aliasing -std=gnu89"
 
 inherit xenclient update-rc.d useradd
 
