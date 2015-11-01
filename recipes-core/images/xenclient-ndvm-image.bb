@@ -59,7 +59,7 @@ IMAGE_INSTALL = "\
 ROOTFS_POSTPROCESS_COMMAND += '${@base_conditional("DISTRO_TYPE", "release", "zap_root_password; ", "",d)}'
 
 post_rootfs_shell_commands() {
-	sed -i 's|root:x:0:0:root:/home/root:/bin/sh|root:x:0:0:root:/root:/bin/bash|' ${IMAGE_ROOTFS}/etc/passwd;
+	sed -i 's|root:x:0:0:root:/root:/bin/sh|root:x:0:0:root:/root:/bin/bash|' ${IMAGE_ROOTFS}/etc/passwd;
 
 	echo '1.0.0.0 dom0' >> ${IMAGE_ROOTFS}/etc/hosts;
 
@@ -82,12 +82,6 @@ remove_initscripts() {
         rm -f ${IMAGE_ROOTFS}${sysconfdir}/init.d/sshd
         update-rc.d -r ${IMAGE_ROOTFS} sshd remove
     fi
-}
-
-# Symlink /root to /home/root until nothing references /root anymore, e.g. SELinux file_contexts
-# Will be needed when we follow upstream base-files
-link_root_dir() {
-    ln -sf /home/root ${IMAGE_ROOTFS}/root
 }
 
 ROOTFS_POSTPROCESS_COMMAND += " post_rootfs_shell_commands; remove_initscripts; "

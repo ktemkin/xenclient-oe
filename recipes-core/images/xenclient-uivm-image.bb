@@ -139,7 +139,7 @@ post_rootfs_shell_commands() {
 	# enable ctrlaltdel reboot because PV driver uses ctrl+alt+del to interpret reboot issued via xenstore
 	echo 'ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now' >> ${IMAGE_ROOTFS}/etc/inittab;
 
-	sed -i 's|root:x:0:0:root:/home/root:/bin/sh|root:x:0:0:root:/root:/bin/bash|' ${IMAGE_ROOTFS}/etc/passwd;
+	sed -i 's|root:x:0:0:root:/root:/bin/sh|root:x:0:0:root:/root:/bin/bash|' ${IMAGE_ROOTFS}/etc/passwd;
 
 	echo '1.0.0.0 dom0' >> ${IMAGE_ROOTFS}/etc/hosts;
 
@@ -171,12 +171,6 @@ remove_initscripts() {
         rm -f ${IMAGE_ROOTFS}${sysconfdir}/init.d/urandom
         update-rc.d -r ${IMAGE_ROOTFS} urandom remove
     fi
-}
-
-# Symlink /root to /home/root until nothing references /root anymore, e.g. SELinux file_contexts
-# Will be needed when we follow upstream base-files
-link_root_dir() {
-    ln -sf /home/root ${IMAGE_ROOTFS}/root
 }
 
 ROOTFS_POSTPROCESS_COMMAND += " post_rootfs_shell_commands; remove_initscripts; "

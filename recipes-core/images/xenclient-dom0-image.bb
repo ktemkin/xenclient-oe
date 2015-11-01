@@ -40,7 +40,7 @@ post_rootfs_shell_commands() {
 	# zap root password in shadow
 	sed -i 's%^root:[^:]*:%root:*:%' ${IMAGE_ROOTFS}/etc/shadow;
 
-	sed -i 's|root:x:0:0:root:/home/root:/bin/sh|root:x:0:0:root:/root:/bin/bash|' ${IMAGE_ROOTFS}/etc/passwd;
+	sed -i 's|root:x:0:0:root:/root:/bin/sh|root:x:0:0:root:/root:/bin/bash|' ${IMAGE_ROOTFS}/etc/passwd;
 
 	mkdir -p ${IMAGE_ROOTFS}/config/etc;
 	mv ${IMAGE_ROOTFS}/etc/passwd ${IMAGE_ROOTFS}/config/etc;
@@ -116,12 +116,6 @@ remove_initscripts() {
         rm -f ${IMAGE_ROOTFS}${sysconfdir}/init.d/mount-special
         update-rc.d -r ${IMAGE_ROOTFS} mount-special remove
     fi
-}
-
-# Symlink /root to /home/root until nothing references /root anymore, e.g. SELinux file_contexts
-# Will be needed when we follow upstream base-files
-link_root_dir() {
-    ln -sf /home/root ${IMAGE_ROOTFS}/root
 }
 
 ROOTFS_POSTPROCESS_COMMAND += " post_rootfs_shell_commands; remove_initscripts; process_tmp_stubdomain_items; "

@@ -37,7 +37,7 @@ IMAGE_INSTALL = "\
 
 post_rootfs_shell_commands() {
 	echo 'ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now' >> ${IMAGE_ROOTFS}/etc/inittab;
-	sed -i 's|root:x:0:0:root:/home/root:/bin/sh|root:x:0:0:root:/root:/bin/bash|' ${IMAGE_ROOTFS}/etc/passwd;
+	sed -i 's|root:x:0:0:root:/root:/bin/sh|root:x:0:0:root:/root:/bin/bash|' ${IMAGE_ROOTFS}/etc/passwd;
 	echo '1.0.0.0 dom0' >> ${IMAGE_ROOTFS}/etc/hosts;
 	rm -f ${IMAGE_ROOTFS}/etc/resolv.conf;
 	ln -s /var/volatile/etc/resolv.conf ${IMAGE_ROOTFS}/etc/resolv.conf;
@@ -53,12 +53,7 @@ remove_initscripts() {
     fi
 }
 
-# Symlink /root to /home/root until nothing references /root anymore, e.g. SELinux file_contexts
-link_root_dir() {
-    ln -sf /home/root ${IMAGE_ROOTFS}/root
-}
-
-ROOTFS_POSTPROCESS_COMMAND += " post_rootfs_shell_commands; remove_initscripts; link_root_dir; "
+ROOTFS_POSTPROCESS_COMMAND += " post_rootfs_shell_commands; remove_initscripts; "
 
 inherit image
 #inherit validate-package-versions
