@@ -1,4 +1,4 @@
-PR .= ".1"
+PR .= ".2"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:"
 
@@ -27,11 +27,5 @@ do_install_append() {
     install -d ${D}${sysconfdir}/mdev
     install -m 0755 ${WORKDIR}/find-touchscreen.sh ${D}${sysconfdir}/mdev/
     install -m 0755 ${WORKDIR}/mdev ${D}${sysconfdir}/init.d/
-
-    # SELinux doesn't like busybox links
-    #install -d ${D}${base_sbindir}
-    #cp -a ${D}${base_bindir}/busybox.nosuid ${D}${base_sbindir}/udhcpc
-    #grep -v '/udhcpc' ${D}${sysconfdir}/busybox.links.nosuid > ${S}/busybox.links.nosuid.tmp
-    #install -m 0644 ${S}/busybox.links.nosuid.tmp ${D}${sysconfdir}/busybox.links.nosuid
 }
 
