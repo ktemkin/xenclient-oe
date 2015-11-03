@@ -5,6 +5,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 PV = "${XEN_VERSION}"
 
+DEPENDS = "glib-2.0"
+
 SRC_URI = "${XEN_SRC_URI};name=source \
     file://bp-ept-update-aa9114edd97b292cd89b3616e3f2089471fd220.patch;patch=1 \
     file://fix-xenctrl-enum-defn.patch;patch=1 \
