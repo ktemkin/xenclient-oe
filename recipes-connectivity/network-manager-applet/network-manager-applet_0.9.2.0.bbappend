@@ -42,6 +42,9 @@ SRC_URI += " \
            file://nm-signal-100.png \
 "
 
+SRC_URI[archive.md5sum] = "9623aeb6c782a8d782500cf12c887b5b"
+SRC_URI[archive.sha256sum] = "ebe725d0140f658c6a3f384674c72fba7a7c417df3be0e84ee8f45e6dfc219de"
+
 EXTRA_OECONF += " \
                   --with-bluetooth=no \
 "
