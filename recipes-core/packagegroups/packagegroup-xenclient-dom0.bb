@@ -39,7 +39,7 @@ RDEPENDS_${PN} = " \
     xenclient-get-config-key \
     xenclient-root-ro \
     alsa-utils-alsactl \
-    alsa-utils-alsaconf \
+    alsa-utils-scripts \
     alsa-utils-alsamixer \
     xenclient-boot-sound \
     curl \
