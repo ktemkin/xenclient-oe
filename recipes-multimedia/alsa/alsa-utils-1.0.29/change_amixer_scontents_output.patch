@@ -1,8 +1,10 @@
---- a/amixer/amixer.c	2013-12-20 14:59:53.253360796 +0000
-+++ b/amixer/amixer.c	2013-12-20 15:27:51.697300798 +0000
-@@ -227,6 +227,16 @@
+diff --git a/amixer/amixer.c b/amixer/amixer.c
+index ed60e7c..a892b04 100644
+--- a/amixer/amixer.c
++++ b/amixer/amixer.c
+@@ -198,6 +198,16 @@ static int convert_prange(long val, long min, long max)
+ 	return tmp;
  }
- #endif
  
 +static const char *get_percent2(int val, int min, int max)
 +{
@@ -14,10 +16,10 @@
 +        return str;
 +}
 +
- static long get_integer(char **ptr, long min, long max)
- {
- 	long val = min;
-@@ -1013,6 +1023,209 @@
+ /* Function to convert from percentage to volume. val = percentage */
+ 
+ #define convert_prange1(val, min, max) \
+@@ -1014,6 +1024,210 @@ static int show_selem(snd_mixer_t *handle, snd_mixer_selem_id_t *id, const char
  	return 0;
  }
  
@@ -223,11 +225,12 @@
 +        printf("\n");
 +        return 0;
 +}
-+	
++
++
  static int selems(int level)
  {
  	int err;
-@@ -1045,8 +1258,7 @@
+@@ -1046,8 +1260,7 @@ static int selems(int level)
  		snd_mixer_selem_get_id(elem, sid);
  		if (!(level & LEVEL_INACTIVE) && !snd_mixer_selem_is_active(elem))
  			continue;
@@ -237,7 +240,7 @@
  	}
  	snd_mixer_close(handle);
  	return 0;
-@@ -1647,8 +1859,7 @@
+@@ -1481,8 +1694,7 @@ static int sset(unsigned int argc, char *argv[], int roflag, int keep_handle)
  		}
  	}
  	if (!quiet) {
