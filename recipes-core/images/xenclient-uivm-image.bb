@@ -147,6 +147,8 @@ post_rootfs_shell_commands() {
 
 	# readonly rootfs prevents sshd from creating dirs
 	mkdir ${IMAGE_ROOTFS}/root/.ssh;
+	
+	mkdir ${IMAGE_ROOTFS}/root/.cache;
 }
 
 remove_initscripts() {
