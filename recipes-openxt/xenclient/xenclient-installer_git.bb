@@ -24,4 +24,6 @@ FILES_${PN}-part2 = "/*"
 do_install () {
     ${S}/install part1 ${D}/install
     ${S}/install part2 ${D}
+    # Wow, what a bad idea to name a root file run when run is a directory provided by base-files
+    mv -f ${D}/run ${D}/run.installer
 }

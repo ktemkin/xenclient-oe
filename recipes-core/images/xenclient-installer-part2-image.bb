@@ -27,6 +27,9 @@ post_rootfs_shell_commands() {
 	rm -rf ${IMAGE_ROOTFS}/dev;
 	rm -rf ${IMAGE_ROOTFS}/etc;
 	rm -rf ${IMAGE_ROOTFS}/usr;
+	# safe to now remove the run directory and put the script there
+	rm -rf ${IMAGE_ROOTFS}/run;
+	mv -f ${IMAGE_ROOTFS}/run.installer ${IMAGE_ROOTFS}/run;
 }
 
 ROOTFS_POSTPROCESS_COMMAND += " post_rootfs_shell_commands; "
