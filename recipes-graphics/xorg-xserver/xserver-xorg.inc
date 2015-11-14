@@ -1,7 +1,7 @@
 require xserver-xorg-common.inc
 
 PROTO_DEPS += "xf86driproto dri2proto"
-LIB_DEPS += "mesa-dri"
+LIB_DEPS += "mesa"
 
 EXTRA_OECONF += "\
                  --enable-dri \
