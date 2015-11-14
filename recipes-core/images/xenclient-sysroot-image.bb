@@ -59,7 +59,7 @@ post_rootfs_shell_commands() {
 	mkdir -p ${IMAGE_ROOTFS}/boot/system ;
 
 	# Remove unwanted packages specified above
-	opkg-cl -f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} ${OPKG_ARGS} -force-depends remove ${PACKAGE_REMOVE};
+	opkg -f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} ${OPKG_ARGS} -force-depends remove ${PACKAGE_REMOVE};
 
 	# Write coredumps in /var/cores
 	echo 'kernel.core_pattern = /var/cores/%e-%t.%p.core' >> ${IMAGE_ROOTFS}/etc/sysctl.conf ;

@@ -143,7 +143,7 @@ post_rootfs_shell_commands() {
 
 	echo '1.0.0.0 dom0' >> ${IMAGE_ROOTFS}/etc/hosts;
 
-	opkg-cl -f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} ${OPKG_ARGS} -force-depends remove ${PACKAGE_REMOVE}
+	opkg -f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} ${OPKG_ARGS} -force-depends remove ${PACKAGE_REMOVE}
 
 	# readonly rootfs prevents sshd from creating dirs
 	mkdir ${IMAGE_ROOTFS}/root/.ssh;
