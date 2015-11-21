@@ -1,11 +1,11 @@
 DESCRIPTION = "read-edid elucidates various very useful informations from a conforming PnP monitor"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=36c7536ba19811d66ab53d9a19cbde7e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=292c42e2aedc4af636636bf7af0e2b26"
 
 SRC_URI = "http://polypux.org/projects/read-edid/read-edid-${PV}.tar.gz "
 
-SRC_URI[md5sum] = "81f6a57162127ab9e969da53bc290e63"
-SRC_URI[sha256sum] = "17430e66dc03812b6f1ac532acb65c8e3837dd0e90b6b45e1c4ea324d60a8027"
+SRC_URI[md5sum] = "016546e438bf6c98739ff74061df9854"
+SRC_URI[sha256sum] = "c7c6d8440f5b90f98e276829271ccea5b2ff5a3413df8a0f87ec09f834af186f"
 
 inherit pkgconfig cmake
 
